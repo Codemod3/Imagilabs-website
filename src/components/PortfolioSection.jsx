@@ -29,35 +29,35 @@ const PortfolioSection = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Header Area */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
-          <h2 className="text-5xl md:text-6xl font-normal tracking-tight">Portfolio</h2>
-          <p className="text-white/40 text-lg md:text-xl max-w-xs md:text-right leading-relaxed">
+          <h2 className="text-5xl md:text-6xl font-normal tracking-tight text-black dark:text-white">Portfolio</h2>
+          <p className="text-black/40 dark:text-white/40 text-lg md:text-xl max-w-xs md:text-right leading-relaxed">
             Minimalist and intuitive design for seamless experiences.
           </p>
         </div>
 
         {/* Divider Line */}
-        <div className="w-full h-px bg-white/[0.1] mb-16"></div>
+        <div className="w-full h-px bg-black/[0.08] dark:bg-white/[0.1] mb-16"></div>
 
         {/* Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
           {projects.map((project, index) => (
             <div key={index} className="group cursor-pointer">
               {/* Image Placeholder (Empty/Gray) */}
-              <div className="aspect-[16/10] bg-white/[0.03] rounded-3xl mb-8 border border-white/[0.05] group-hover:border-white/[0.1] transition-all duration-500 overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="aspect-[16/10] bg-white/60 dark:bg-white/[0.03] rounded-3xl mb-8 border border-white/80 dark:border-white/[0.05] group-hover:border-white dark:group-hover:border-white/[0.1] transition-all duration-500 overflow-hidden relative shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)] dark:shadow-none backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/50 dark:from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
               {/* Project Info */}
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-3xl font-normal mb-2 group-hover:text-brand-purple transition-colors duration-300">
+                  <h3 className="text-3xl font-normal mb-2 text-black dark:text-white group-hover:text-brand-purple transition-colors duration-300">
                     {project.title}
                   </h3>
                   {project.category && (
-                    <p className="text-white/40 text-lg">{project.category}</p>
+                    <p className="text-black/40 dark:text-white/40 text-lg">{project.category}</p>
                   )}
                   {project.description && (
-                    <p className="text-white/40 text-lg max-w-md leading-relaxed mt-2">{project.description}</p>
+                    <p className="text-black/40 dark:text-white/40 text-lg max-w-md leading-relaxed mt-2">{project.description}</p>
                   )}
                 </div>
 

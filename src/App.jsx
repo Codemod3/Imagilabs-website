@@ -1,4 +1,5 @@
 import React from 'react';
+import homeBg from './assets/home-bg/Homepage.png';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import LogoCarousel from './components/LogoCarousel';
@@ -10,44 +11,77 @@ import TestimonialsSection from './components/TestimonialsSection';
 import CTASection from './components/CTASection';
 import PortfolioSection from './components/PortfolioSection';
 import Footer from './components/Footer';
-import CursorGlow from './components/CursorGlow';
-
-// Import Icons
-import photoshopIcon from './assets/icons/photoshop.png';
-import illustratorIcon from './assets/icons/adobe-illustrator.png';
-import figmaIcon from './assets/icons/figma.png';
-import dockerIcon from './assets/icons/Docker.png';
-import githubIcon from './assets/icons/github.png';
+import { useState, useEffect } from 'react';
 
 function App() {
-  return (
-    <div className="bg-black min-h-screen font-sans text-white relative overflow-x-hidden">
-      {/* Dynamic Mouse Tracking Glow (placed behind everything) */}
-      <div className="fixed inset-0 z-0">
-        <CursorGlow />
-      </div>
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
 
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  return (
+    <div className="min-h-screen font-sans relative overflow-x-hidden transition-colors duration-300">
       {/* App Content */}
       <div className="relative z-10 bg-transparent">
-        <Navbar />
+        <Navbar theme={theme} toggleTheme={toggleTheme} />
         <main>
           {/* Main content area on black */}
-          <div className="relative">
+          <div id="homepage" className="relative">
+            {/* Background PNG treated as a floating element */}
+            <img 
+              src={homeBg} 
+              alt="" 
+              className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-full max-w-[1920px] pointer-events-none -z-10"
+            />
             <div className="relative z-10">
               <HeroSection />
               <LogoCarousel />
             </div>
           </div>
           
-          <AboutSection />
-          <ExpertiseSection />
-          <PortfolioSection />
-          <TrustSection />
-          <FAQSection />
-          <TestimonialsSection />
-          <CTASection />
+          <div id="about">
+            <AboutSection />
+          </div>
+          
+          {/* Ambient Glows */}
+          <div id="services" className="relative">
+            {/* Top Left Patch */}
+            <div className="absolute top-1/4 -left-32 w-[450px] h-[200px] bg-[#7163E9]/40 rounded-full blur-[100px] pointer-events-none -z-10 -rotate-12" />
+            <ExpertiseSection />
+            <PortfolioSection />
+          </div>
+
+          <div className="relative">
+            {/* Middle Right Patch */}
+            <div className="absolute top-1/2 -right-32 w-[500px] h-[250px] bg-[#4B3AD9]/35 rounded-full blur-[110px] pointer-events-none -z-10 rotate-12 -translate-y-1/2" />
+            <TrustSection />
+          </div>
+
+          <div className="relative">
+            {/* Bottom Left Patch */}
+            <div className="absolute top-1/3 -left-32 w-[450px] h-[200px] bg-[#7163E9]/40 rounded-full blur-[100px] pointer-events-none -z-10 -rotate-6" />
+            <FAQSection />
+            <TestimonialsSection />
+          </div>
+          
+          <div id="contact">
+            <CTASection />
+          </div>
         </main>
-        <Footer />
+        <Footer theme={theme} />
       </div>
     </div>
   );

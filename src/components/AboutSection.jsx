@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutSection = () => {
   return (
-    <section className="w-full py-24 relative z-30">
+    <section className="w-full py-24 relative z-30 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         {/* Section Label */}
         <div className="mb-12">
@@ -13,7 +13,7 @@ const AboutSection = () => {
 
         {/* Main Text Content */}
         <div className="max-w-5xl">
-          <p className="text-2xl md:text-3xl lg:text-4xl text-white/50 leading-relaxed font-normal">
+          <p className="text-2xl md:text-3xl lg:text-4xl text-black/50 dark:text-white/50 leading-relaxed font-normal">
             We are a team of visionary designers and developers dedicated to crafting premium digital experiences. By blending high-fidelity aesthetics with cutting-edge technology, we help brands stand out in a crowded digital landscape.
           </p>
         </div>

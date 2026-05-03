@@ -109,13 +109,13 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="w-full py-32 bg-transparent border-y border-white/[0.05] relative overflow-hidden z-10">
+    <section className="w-full py-32 bg-transparent border-y border-black/[0.05] dark:border-white/[0.05] relative overflow-hidden z-10 transition-colors duration-300">
       {/* Header Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 text-center mb-20 space-y-4">
-        <h2 className="text-4xl md:text-5xl font-normal tracking-tight">
+        <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-black dark:text-white">
           What Our Clients Say
         </h2>
-        <p className="text-white/40 text-lg md:text-xl font-light tracking-wide">
+        <p className="text-black/40 dark:text-white/40 text-lg md:text-xl font-light tracking-wide">
           Type your creative idea in a simple sentence.
         </p>
       </div>
@@ -133,35 +133,35 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div 
               key={index} 
-              className={`flex-shrink-0 p-8 md:p-10 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl snap-center group hover:border-white/20 transition-all duration-500 relative overflow-hidden flex flex-col justify-between ${
+              className={`flex-shrink-0 p-8 md:p-10 rounded-3xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.08] backdrop-blur-xl snap-center group hover:border-black/[0.12] dark:hover:border-white/20 transition-all duration-500 relative overflow-hidden flex flex-col justify-between ${
                 testimonial.size === 'large' ? 'w-[550px] md:w-[650px] min-h-[340px]' : 
                 testimonial.size === 'medium' ? 'w-[500px] md:w-[580px] min-h-[300px]' : 
                 'w-[450px] md:w-[520px] min-h-[260px]'
               }`}
             >
               {/* Glass Shine Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-black/[0.02] dark:from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               {/* Quote */}
-              <p className="text-base md:text-lg text-white/70 leading-relaxed mb-8 font-light">
+              <p className="text-base md:text-lg text-black/60 dark:text-white/70 leading-relaxed mb-8 font-light">
                 "{testimonial.quote}"
               </p>
 
               {/* Author Info Row */}
-              <div className="flex items-center justify-between w-full mt-auto pt-6 border-t border-white/[0.05]">
+              <div className="flex items-center justify-between w-full mt-auto pt-6 border-t border-black/[0.05] dark:border-white/[0.05]">
                 <div className="flex items-center gap-4">
                   {/* Profile Image Placeholder */}
-                  <div className="w-12 h-12 rounded-full bg-white opacity-90 border border-white/10 flex-shrink-0"></div>
+                  <div className="w-12 h-12 rounded-full bg-black/10 dark:bg-white opacity-90 border border-black/10 dark:border-white/10 flex-shrink-0"></div>
                   <div className="flex flex-col">
-                    <h4 className="text-base font-normal text-white">{testimonial.name}</h4>
-                    <p className="text-white/40 text-xs">{testimonial.title}</p>
+                    <h4 className="text-base font-normal text-black dark:text-white">{testimonial.name}</h4>
+                    <p className="text-black/40 dark:text-white/40 text-xs">{testimonial.title}</p>
                   </div>
                 </div>
 
                 {/* Stars */}
                 <div className="flex gap-0.5">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-white text-white opacity-80" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-brand-purple text-brand-purple opacity-80" />
                   ))}
                 </div>
               </div>
@@ -179,7 +179,7 @@ const TestimonialsSection = () => {
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               activeIndex === index 
               ? 'bg-brand-purple shadow-[0_0_10px_#7163E9] scale-125' 
-              : 'bg-white/20 hover:bg-white/40'
+              : 'bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

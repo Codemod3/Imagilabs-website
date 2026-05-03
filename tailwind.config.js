@@ -4,8 +4,12 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Manrope', 'sans-serif'],
+      },
       colors: {
         'brand-purple': '#4B3AD9',
       },
@@ -43,4 +47,3 @@ export default {
   },
   plugins: [],
 }
-

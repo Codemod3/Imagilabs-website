@@ -18,7 +18,7 @@ const logoData = [
 const LogoCarousel = () => {
   return (
     <section className="w-full bg-transparent py-24 relative z-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto border-y border-white/[0.15] py-12 md:py-16 relative">
+      <div className="max-w-7xl mx-auto border-y border-black/[0.08] dark:border-white/[0.15] py-12 md:py-16 relative">
         {/* Simplified Loop: No overlapping, just a clean row */}
         <div className="flex w-fit animate-marquee gap-24 md:gap-40 px-10">
           {/* First Set */}

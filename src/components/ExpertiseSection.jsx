@@ -49,12 +49,12 @@ const ExpertiseSection = () => {
   ];
 
   return (
-    <section className="w-full py-24 bg-transparent relative overflow-hidden">
+    <section className="w-full py-24 bg-transparent relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-normal mb-6 tracking-tight">Our Expertise</h2>
-          <p className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-normal mb-6 tracking-tight text-black dark:text-white">Our Expertise</h2>
+          <p className="text-black/40 dark:text-white/40 text-lg md:text-xl max-w-2xl mx-auto">
             Transforming your vision into digital reality with cutting-edge technology.
           </p>
         </div>
@@ -67,24 +67,21 @@ const ExpertiseSection = () => {
               className={`group relative p-10 rounded-3xl transition-all duration-500 cursor-pointer flex flex-col items-center text-center backdrop-blur-xl ${
                 item.highlighted 
                 ? 'bg-gradient-to-br from-[#7163E9] via-[#6052E5] to-[#4B3AD9] text-white shadow-[0_20px_60px_rgba(75,58,217,0.4)] scale-105 z-10 border-t border-white/20' 
-                : 'bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] hover:-translate-y-2'
+                : 'bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.05] dark:border-white/[0.08] hover:border-black/[0.15] dark:hover:border-white/[0.15] hover:-translate-y-2'
               }`}
-              style={!item.highlighted ? {
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0.04) 100%)'
-              } : {}}
             >
               {/* Icon - No background container */}
               <div className="mb-10 flex justify-center items-center transition-transform duration-300 group-hover:scale-110">
                 <img 
-                  src={item.icon} 
-                  alt={item.title} 
-                  className={`w-8 h-8 object-contain ${item.highlighted ? 'filter brightness-0 invert' : 'opacity-80'}`} 
-                />
+                   src={item.icon} 
+                   alt={item.title} 
+                   className={`w-8 h-8 object-contain ${item.highlighted ? 'filter brightness-0 invert' : 'opacity-80 dark:opacity-80 opacity-60'}`} 
+                 />
               </div>
 
               {/* Text Content */}
-              <h3 className="text-2xl font-normal mb-4">{item.title}</h3>
-              <p className={`text-lg leading-relaxed ${item.highlighted ? 'text-white/90' : 'text-white/40 group-hover:text-white/60 transition-colors duration-300'}`}>
+              <h3 className="text-2xl font-normal mb-4 text-black dark:text-white">{item.title}</h3>
+              <p className={`text-lg leading-relaxed ${item.highlighted ? 'text-white/90' : 'text-black/50 dark:text-white/40 group-hover:text-black/70 dark:group-hover:text-white/60 transition-colors duration-300'}`}>
                 {item.description}
               </p>
 

@@ -1,16 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Manrope', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer utilities {
@@ -33,4 +54,54 @@ body {
   100% {
     transform: translateX(-50%);
   }
+}
+
+/* ── Theme toggle ── */
+.theme-toggle-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: background 300ms;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(128, 128, 128, 0.14);
+}
+
+/* Both icons sit stacked in the same space */
+.toggle-icon {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  transition: opacity 350ms ease, transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* SUN — hidden in dark mode, visible in light mode */
+.toggle-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-is-light .toggle-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* MOON — visible in dark mode, hidden in light mode */
+.toggle-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-is-light .toggle-moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
 }
