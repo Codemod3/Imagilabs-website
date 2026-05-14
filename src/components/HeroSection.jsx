@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Import Icons
-import reactIcon from '../assets/icons/react.png';
+import reactIcon from '../assets/icons/React.png';
 import illustratorIcon from '../assets/icons/adobe-illustrator.png';
 import figmaIcon from '../assets/icons/figma.png';
 import dockerIcon from '../assets/icons/Docker.png';
