@@ -49,6 +49,7 @@ function App() {
             />
             <div className="relative z-10">
               <HeroSection />
+              <LogoCarousel />
               
             </div>
           </div>
@@ -80,7 +81,7 @@ function App() {
           
           <div id="contact">
             <CTASection />
-            <LogoCarousel />
+            
           </div>
         </main>
         <Footer theme={theme} />

@@ -42,7 +42,7 @@ const ExpertiseSection = () => {
     },
     {
       icon: iconSMS,
-      title: "AI Branding & Marketing",
+      title: "Branding & Marketing",
       description: "Enhance brand presence with AI-powered marketing strategies, content creation, and digital growth solutions.",
       highlighted: false
     }
