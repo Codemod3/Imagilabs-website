@@ -61,7 +61,7 @@ const DotGrid = () => {
   }, { scope: stageRef });
 
   return (
-    <div className="w-44 h-48 mt-20 select-none pointer-events-none" style={{ overflow: 'visible' }}>
+    <div className="hidden md:block w-44 h-48 mt-20 select-none pointer-events-none" style={{ overflow: 'visible' }}>
       <svg
         ref={stageRef}
         viewBox="0 0 98 108"
@@ -155,7 +155,7 @@ const TrustItem = ({ reason }) => {
       </AnimatePresence>
 
       {/* Inner row — clipped for shine */}
-      <div className="relative flex items-center gap-8 rounded-2xl overflow-hidden">
+      <div className="relative flex items-center gap-4 md:gap-8 rounded-2xl overflow-hidden">
         {/* GSAP shine sweep */}
         <div
           ref={shineRef}
@@ -169,8 +169,8 @@ const TrustItem = ({ reason }) => {
         {/* Number badge — colour only, no position animation */}
         <div
           className={`
-            relative z-10 flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center
-            text-xl font-normal backdrop-blur-xl transition-all duration-300
+            relative z-10 flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center
+            text-base md:text-xl font-normal backdrop-blur-xl transition-all duration-300
             ${isHovered
               ? 'text-white shadow-[0_15px_40px_rgba(113,99,233,0.55)]'
               : reason.highlighted
@@ -194,7 +194,7 @@ const TrustItem = ({ reason }) => {
           <motion.h3
             animate={{ x: isHovered ? 5 : 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-            className={`text-xl md:text-2xl font-normal select-none transition-colors duration-300 ${
+            className={`text-lg md:text-2xl font-normal select-none transition-colors duration-300 ${
               isHovered ? 'text-[#7163E9]' : 'text-black/80 dark:text-white/80'
             }`}
           >
@@ -230,6 +230,9 @@ const TrustSection = () => {
   ];
 
   useGSAP(() => {
+    // Disable animations on mobile
+    if (window.innerWidth < 768) return;
+
     if (headingRef.current) {
       const split = new SplitText(headingRef.current, { type: 'words,chars' });
       gsap.from(split.chars, {
@@ -254,15 +257,15 @@ const TrustSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-32 bg-transparent border-y border-black/[0.05] dark:border-white/[0.05] relative z-10 transition-colors duration-300"
+      className="w-full py-10 md:py-32 bg-transparent border-y border-black/[0.05] dark:border-white/[0.05] relative z-10 transition-colors duration-300"
     >
-      <div className="max-w-5xl mx-auto px-4 md:px-8 lg:pl-32 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:pl-32 flex flex-col lg:flex-row items-start lg:items-start justify-start lg:justify-center gap-10 md:gap-20">
 
         {/* Left: sticky heading + draggable fan */}
-        <div className="lg:sticky lg:top-40 max-w-xl self-center lg:-ml-16 flex flex-col items-start">
+        <div className="lg:sticky lg:top-40 max-w-xl self-start lg:-ml-16 flex flex-col items-start">
           <h2
             ref={headingRef}
-            className="text-5xl md:text-6xl font-normal tracking-tight leading-[1.2] text-black/80 dark:text-white/80"
+            className="text-3xl md:text-6xl font-normal tracking-tight leading-[1.2] text-black/80 dark:text-white/80"
           >
             Why Businesses <br />
             <span className="text-black dark:text-white">Trust Us</span>

@@ -47,37 +47,37 @@ const ExpertiseSection = () => {
   ];
 
   return (
-    <section className="w-full pt-4 pb-24 bg-transparent relative overflow-hidden transition-colors duration-300">
+    <section className="w-full pt-4 pb-12 md:pb-24 bg-transparent relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-normal mb-6 tracking-tight text-black dark:text-white">Our Expertise</h2>
-          <p className="text-black/40 dark:text-white/40 text-lg md:text-xl max-w-2xl mx-auto">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl md:text-5xl font-normal mb-4 md:mb-6 tracking-tight text-black dark:text-white">Our Expertise</h2>
+          <p className="text-black/40 dark:text-white/40 text-base md:text-xl max-w-2xl mx-auto px-4">
             Transforming your vision into digital reality with cutting-edge technology.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {expertise.map((item, index) => (
             <div 
               key={index}
-              className="group relative p-10 rounded-3xl transition-all duration-500 cursor-pointer flex flex-col items-center text-center backdrop-blur-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.05] dark:border-white/[0.08] hover:bg-gradient-to-br hover:from-[#7163E9] hover:via-[#6052E5] hover:to-[#4B3AD9] hover:text-white hover:shadow-[0_20px_60px_rgba(75,58,217,0.4)] hover:scale-105 hover:z-10 hover:border-t-white/20"
+              className="group relative aspect-square md:aspect-auto p-4 md:p-10 rounded-3xl transition-all duration-500 cursor-pointer flex flex-col items-center justify-center text-center backdrop-blur-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/[0.05] dark:border-white/[0.08] hover:bg-gradient-to-br hover:from-[#7163E9] hover:via-[#6052E5] hover:to-[#4B3AD9] hover:text-white hover:shadow-[0_20px_60px_rgba(75,58,217,0.4)] hover:scale-105 hover:z-10 hover:border-t-white/20"
             >
               {/* Icon - SVG that changes from purple to white on hover */}
-              <div className="mb-10 flex justify-center items-center transition-transform duration-300 group-hover:scale-110 text-[#7163E9] group-hover:text-white">
-                <div className="w-12 h-12 flex items-center justify-center">
+              <div className="mb-2 md:mb-10 flex justify-center items-center transition-transform duration-300 group-hover:scale-110 text-[#7163E9] group-hover:text-white">
+                <div className="w-8 h-8 md:w-12 md:h-12 flex items-center justify-center">
                   {React.cloneElement(item.icon, { 
-                    width: "48", 
-                    height: "48", 
+                    width: "32", 
+                    height: "32", 
                     className: "transition-colors duration-300" 
                   })}
                 </div>
               </div>
 
               {/* Text Content */}
-              <h3 className="text-2xl font-normal mb-4 text-black dark:text-white group-hover:text-white transition-colors duration-300">{item.title}</h3>
-              <p className="text-lg leading-relaxed text-black/50 dark:text-white/40 group-hover:text-white/90 transition-colors duration-300">
+              <h3 className="text-sm md:text-2xl font-normal mb-1 md:mb-4 text-black dark:text-white group-hover:text-white transition-colors duration-300">{item.title}</h3>
+              <p className="text-[10px] md:text-lg leading-tight md:leading-relaxed text-black/50 dark:text-white/40 group-hover:text-white/90 transition-colors duration-300">
                 {item.description}
               </p>
 

@@ -17,13 +17,13 @@ const logoData = [
 
 const LogoCarousel = () => {
   return (
-    <section className="w-full bg-transparent py-24 relative z-20 overflow-hidden">
+    <section className="w-full bg-transparent pt-4 pb-16 md:py-24 relative z-20 overflow-hidden">
       {/* Top border line - constrained like before */}
       <div className="max-w-7xl mx-auto border-t border-black/[0.08] dark:border-white/[0.15]" />
       {/* Logos scroll full width */}
-      <div className="w-full py-12 md:py-16 relative overflow-hidden">
+      <div className="w-full py-8 md:py-16 relative overflow-hidden">
         {/* Simplified Loop: No overlapping, just a clean row */}
-        <div className="flex w-fit animate-marquee gap-24 md:gap-40 px-10" style={{ transform: 'translateX(-33.33%)' }}>
+        <div className="flex w-fit animate-marquee gap-16 md:gap-40 px-10" style={{ transform: 'translateX(-33.33%)' }}>
           {/* First Set */}
           {logoData.map((logo) => (
             <div 
@@ -33,7 +33,7 @@ const LogoCarousel = () => {
               <img 
                 src={logo.img} 
                 alt={logo.name} 
-                className="h-10 md:h-12 w-auto object-contain filter brightness-150 contrast-125" 
+                className="h-7 md:h-12 w-auto object-contain filter brightness-150 contrast-125" 
               />
             </div>
           ))}
@@ -46,7 +46,7 @@ const LogoCarousel = () => {
               <img 
                 src={logo.img} 
                 alt={logo.name} 
-                className="h-10 md:h-12 w-auto object-contain filter brightness-150 contrast-125" 
+                className="h-7 md:h-12 w-auto object-contain filter brightness-150 contrast-125" 
               />
             </div>
           ))}
@@ -59,7 +59,7 @@ const LogoCarousel = () => {
               <img 
                 src={logo.img} 
                 alt={logo.name} 
-                className="h-10 md:h-12 w-auto object-contain filter brightness-150 contrast-125" 
+                className="h-7 md:h-12 w-auto object-contain filter brightness-150 contrast-125" 
               />
             </div>
           ))}
