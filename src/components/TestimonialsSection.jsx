@@ -1,98 +1,103 @@
 import React, { useEffect, useRef } from 'react';
 
-const TestimonialsSection = () => {
-  const text1Ref = useRef(null);
-  const text2Ref = useRef(null);
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = '!<>-_\\/[]{}—=+*^?#________';
+    this.update = this.update.bind(this);
+  }
+  setText(newText) {
+    const oldText = this.el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise((resolve) => this.resolve = resolve);
+    this.queue = [];
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      const start = Math.floor(Math.random() * 40);
+      const end = start + Math.floor(Math.random() * 40);
+      this.queue.push({ from, to, start, end });
+    }
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+  update() {
+    let output = '';
+    let complete = 0;
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span class="opacity-35 text-[#7163E9]/60 dark:text-[#8B7EFF]/60 font-light">${char}</span>`;
+      } else {
+        output += from;
+      }
+    }
+    this.el.innerHTML = output;
+    if (complete === this.queue.length) {
+      this.resolve();
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+}
 
-  const texts = [
+const TestimonialsSection = () => {
+  const textRef = useRef(null);
+
+  const phrases = [
     "We skipped",
     "the fake",
     "review part."
   ];
 
   useEffect(() => {
-    const elts = {
-      text1: text1Ref.current,
-      text2: text2Ref.current
+    // Dynamically load Roboto Mono from Google Fonts
+    if (!document.getElementById('roboto-mono-font')) {
+      const link = document.createElement('link');
+      link.id = 'roboto-mono-font';
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap';
+      document.head.appendChild(link);
+    }
+
+    const el = textRef.current;
+    if (!el) return;
+
+    const fx = new TextScramble(el);
+
+    let counter = 0;
+    let timeoutId;
+    let isMounted = true;
+
+    const next = () => {
+      if (!isMounted) return;
+      fx.setText(phrases[counter]).then(() => {
+        if (isMounted) {
+          timeoutId = setTimeout(next, 1800); // 1.8s delay between scrambles makes it highly readable
+        }
+      });
+      counter = (counter + 1) % phrases.length;
     };
 
-    if (!elts.text1 || !elts.text2) return;
-
-    // Controls the speed of morphing
-    const morphTime = 1.0;
-    const cooldownTime = 0.35;
-
-    let textIndex = texts.length - 1;
-    let time = new Date();
-    let morph = 0;
-    let cooldown = cooldownTime;
-
-    elts.text1.textContent = texts[textIndex % texts.length];
-    elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-
-    function setMorph(fraction) {
-      elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-      elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-      
-      fraction = 1 - fraction;
-      elts.text1.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
-      elts.text1.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
-      
-      elts.text1.textContent = texts[textIndex % texts.length];
-      elts.text2.textContent = texts[(textIndex + 1) % texts.length];
-    }
-
-    function doMorph() {
-      morph -= cooldown;
-      cooldown = 0;
-      
-      let fraction = morph / morphTime;
-      
-      if (fraction > 1) {
-        cooldown = cooldownTime;
-        fraction = 1;
-      }
-      
-      setMorph(fraction);
-    }
-
-    function doCooldown() {
-      morph = 0;
-      
-      elts.text2.style.filter = "";
-      elts.text2.style.opacity = "100%";
-      
-      elts.text1.style.filter = "";
-      elts.text1.style.opacity = "0%";
-    }
-
-    let animationFrameId;
-
-    function animate() {
-      animationFrameId = requestAnimationFrame(animate);
-      
-      let newTime = new Date();
-      let shouldIncrementIndex = cooldown > 0;
-      let dt = (newTime - time) / 1000;
-      time = newTime;
-      
-      cooldown -= dt;
-      
-      if (cooldown <= 0) {
-        if (shouldIncrementIndex) {
-          textIndex++;
-        }
-        
-        doMorph();
-      } else {
-        doCooldown();
-      }
-    }
-
-    animate();
+    next();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      isMounted = false;
+      clearTimeout(timeoutId);
+      cancelAnimationFrame(fx.frameRequest);
     };
   }, []);
 
@@ -106,37 +111,14 @@ const TestimonialsSection = () => {
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10 text-center flex flex-col items-center justify-center min-h-[160px] md:min-h-[260px]">
         
-        {/* Morphing Text Container - Applies threshold SVG filter and blur */}
-        <div 
-          className="relative w-full h-[120px] md:h-[200px] flex items-center justify-center select-none"
-          style={{ filter: "url(#threshold) blur(0.6px)" }}
-        >
+        {/* Scramble Text Container */}
+        <div className="relative w-full h-[120px] md:h-[200px] flex items-center justify-center select-none">
           <span 
-            ref={text1Ref}
-            className="absolute w-full text-center text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-black dark:text-white select-none leading-none font-sans whitespace-nowrap"
-          />
-          <span 
-            ref={text2Ref}
-            className="absolute w-full text-center text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-black dark:text-white select-none leading-none font-sans whitespace-nowrap"
+            ref={textRef}
+            className="w-full text-center text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-[#7163E9] dark:text-[#8B7EFF] select-none leading-none uppercase"
+            style={{ fontFamily: "'Roboto Mono', monospace" }}
           />
         </div>
-
-        {/* SVG filter used to create the merging/gooey effect */}
-        <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
-          <defs>
-            <filter id="threshold">
-              {/* Opacity-cutoff Matrix to merge pixels with blur into a solid gooey edge */}
-              <feColorMatrix 
-                in="SourceGraphic"
-                type="matrix"
-                values="1 0 0 0 0
-                        0 1 0 0 0
-                        0 0 1 0 0
-                        0 0 0 255 -140" 
-              />
-            </filter>
-          </defs>
-        </svg>
 
         {/* Subtle light reflect line underneath */}
         <div className="h-px w-full max-w-sm mx-auto bg-gradient-to-r from-transparent via-[#7163E9]/40 to-transparent mt-8 md:mt-12" />
